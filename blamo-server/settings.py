@@ -6,10 +6,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Security
 SECRET_KEY = config('SECRET_KEY')
-
 DEBUG =  config('DEBUG', cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+]
 
 # Application Definition
 INSTALLED_APPS = [
@@ -19,7 +20,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blamo'
+    'blamo',
 ]
 
 MIDDLEWARE = [
@@ -30,9 +31,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'blamo.middleware.BlamoLogMiddleware',
 ]
 
-ROOT_URLCONF = 'urls'
+ROOT_URLCONF = 'blamo-server.urls'
 
 TEMPLATES = [
     {
@@ -78,14 +80,15 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 # Static Files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
+
+# Blamo Log
+BLAMO_HOSTS = [
+    'http://127.0.0.1:8000',
+]
