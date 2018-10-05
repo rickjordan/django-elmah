@@ -8,12 +8,11 @@ class BlamoLogMiddleware:
 
     def process_exception(self, request, exception):
         """log unhandled 500 errors"""
-        import json
-        import requests
-        import sys
+        import json, requests, sys
         from datetime import datetime
         from django.conf import settings
         from django.views.debug import ExceptionReporter
+        from models import BlamoHost
 
         reporter = ExceptionReporter(
             request,
@@ -22,7 +21,7 @@ class BlamoLogMiddleware:
             sys.exc_info()[2]
         )
 
-        log = {
+        data = json.dumps({
             'host': request.get_host(),
             'path': request.get_full_path(),
             'username': request.user.username,
@@ -30,13 +29,18 @@ class BlamoLogMiddleware:
             'error_type': exception.__class__.__name__,
             'error_message': exception.message,
             'status_code': "500",
-            'raw_html': reporter.get_traceback_html(),
-        }
+            'raw_html': reporter.get_traceback_html()
+        })
 
-        headers = { 'content-type': 'application/json' }
-        
-        for host in settings.BLAMO_HOSTS:
-            url = host + "/blamo/api/v1/logs/"
-            requests.post(url, data=json.dumps(log), headers=headers)
-        
+        headers = { 'Content-Type': "application/json" }
+        hosts = BlamoHost.objects.filter(active=True)
+
+        for host in hosts:
+            headers['Authorization'] = "ApiKey {}:{}".format(
+                host.username, host.api_key
+            )
+
+            url = host.hostname + "/blamo/api/v1/logs/"
+            requests.post(url, data=data, headers=headers)
+            
         return None

@@ -1,6 +1,6 @@
 from datetime import datetime
 from tastypie import fields
-from tastypie.authentication import Authentication
+from tastypie.authentication import ApiKeyAuthentication
 from tastypie.authorization import Authorization
 from tastypie.resources import ModelResource
 from models import BlamoLog
@@ -16,5 +16,5 @@ class BlamoLogResource(ModelResource):
             'host': {'exact'}
         }
 
-        authentication = Authentication()
+        authentication = ApiKeyAuthentication()
         authorization = Authorization()

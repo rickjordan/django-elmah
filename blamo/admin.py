@@ -1,6 +1,22 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
 from django.contrib import admin
+from blamo import models
 
-# Register your models here.
+@admin.register(models.BlamoHost)
+class BlamoHostAdmin(admin.ModelAdmin):
+    list_display = (
+        'hostname',
+        'username',
+        'api_key',
+        'active'
+    )
+
+@admin.register(models.BlamoLog)
+class BlamoLogAdmin(admin.ModelAdmin):
+    list_display = (
+        'host',
+        'path',
+        'username',
+        'datetime',
+        'error_type',
+        'status_code'
+    )
