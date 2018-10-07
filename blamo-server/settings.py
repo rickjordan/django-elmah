@@ -1,4 +1,4 @@
-from decouple import config
+from decouple import config, Csv
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -8,9 +8,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', cast=bool)
 
-ALLOWED_HOSTS = [
-    '127.0.0.1',
-]
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 # Application Definition
 LOGIN_URL = 'login'
@@ -37,7 +35,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    #'blamo.middleware.BlamoLogMiddleware',
+    'blamo.middleware.BlamoLogMiddleware',
 ]
 
 ROOT_URLCONF = 'blamo-server.urls'
@@ -45,9 +43,7 @@ ROOT_URLCONF = 'blamo-server.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            '/blamo/blamo/templates'
-        ],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -65,8 +61,15 @@ WSGI_APPLICATION = 'blamo-server.wsgi.application'
 # Database
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': config('DB_ENGINE'),
+        'NAME': (
+            os.path.join(BASE_DIR, config('DB_NAME'))
+            if config('DB_ENGINE').split('.').pop() == 'sqlite3'
+            else config('DB_NAME')
+        ),
+        'USER': config('DB_USER', default=''),
+        'PASSWORD': config('DB_PWD', default=''),
+        'HOST': config('DB_HOST', default=''),
     }
 }
 
