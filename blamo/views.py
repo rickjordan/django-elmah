@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 from models import BlamoLog
 
-def test(request):
+def log_test(request):
     raise Exception("It Works!")
 
 def log_index(request):

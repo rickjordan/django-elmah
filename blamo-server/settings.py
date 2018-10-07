@@ -6,13 +6,17 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Security
 SECRET_KEY = config('SECRET_KEY')
-DEBUG =  config('DEBUG', cast=bool)
+DEBUG = config('DEBUG', cast=bool)
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
 ]
 
 # Application Definition
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = 'index'
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -21,6 +25,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tastypie',
+    'blamo-server',
     'blamo',
 ]
 
@@ -32,7 +37,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'blamo.middleware.BlamoLogMiddleware',
+    #'blamo.middleware.BlamoLogMiddleware',
 ]
 
 ROOT_URLCONF = 'blamo-server.urls'
@@ -40,7 +45,9 @@ ROOT_URLCONF = 'blamo-server.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            '/blamo/blamo/templates'
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -1,13 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
-    <table border=1>
-        <thead>
+{% extends 'base.html' %}
+
+{% block blamo %}
+
+<table class="table table-bordered table-sm">
+    <thead class="thead-light">
+        <tr>
             <th>Host</th>
             <th>Path</th>
             <th>Code</th>
@@ -16,26 +13,27 @@
             <th>User</th>
             <th>Date</th>
             <th>Time</th>
-        </thead>
-        <tbody>
-        {% for log in logs %}
-            <tr>
-                <td>{{ log.host }}</td>
-                <td>{{ log.path }}</td>
-                <td>{{ log.status_code }}</td>
-                <td>{{ log.error_type }}</td>
-                <td>
-                    {{ log.error_message }}
-                    <a href="/blamo/logs/{{ log.id }}" target="_blank">
-                        Details...
-                    </a>
-                </td>
-                <td>{{ log.username }}</td>
-                <td>{{ log.datetime|date:"m/d/Y" }}</td>
-                <td>{{ log.datetime|time:"h:i A" }}</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-</body>
-</html>
+        </tr>
+    </thead>
+    <tbody>
+    {% for log in logs %}
+        <tr>
+            <td>{{ log.host }}</td>
+            <td>{{ log.path }}</td>
+            <td>{{ log.status_code }}</td>
+            <td>{{ log.error_type }}</td>
+            <td>
+                {{ log.error_message }}
+                <a href="/blamo/logs/{{ log.id }}" target="_blank">
+                    Details...
+                </a>
+            </td>
+            <td>{{ log.username }}</td>
+            <td>{{ log.datetime|date:"m/d/Y" }}</td>
+            <td>{{ log.datetime|time:"h:i A" }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
