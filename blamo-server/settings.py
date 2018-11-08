@@ -7,7 +7,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Security
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', cast=bool)
-
+INTERNAL_IPS = config('INTERNAL_IPS', cast=Csv())
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 # Application Definition
@@ -90,3 +90,11 @@ USE_TZ = True
 
 # Static Files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
+
+if DEBUG:
+    INSTALLED_APPS.append('webpack_loader')
+    WEBPACK_LOADER = {
+        'DEFAULT': {
+            'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
+        }
+    }

@@ -3,6 +3,7 @@ chardet==3.0.4
 Django==1.11.15
 django-decorator-include==1.4.1
 django-tastypie==0.14.1
+django-webpack-loader==0.6.0
 idna==2.7
 pkg-resources==0.0.0
 python-dateutil==2.7.3

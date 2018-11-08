@@ -1,6 +1,10 @@
 .vscode/
 dist/
+node_modules/
 
 *.env
 *.pyc
 *.sqlite3
+
+npm-debug.log
+webpack-stats.json

@@ -1,5 +1,5 @@
+{% load static %}
 <!doctype html>
-
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -22,5 +22,12 @@
     <div class="container-fluid" style="padding-top:20px">
         {% block blamo %}{% endblock %}
     </div>
+    
+    {% if debug %}
+        {% load render_bundle from webpack_loader %}
+        {% render_bundle 'main' %}
+    {% else %}
+
+    {% endif %}
 </body>
 </html>
