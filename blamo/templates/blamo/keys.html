@@ -1,0 +1,49 @@
+{% extends 'blamo/base.html' %}
+
+{% block content %}
+
+<table class="table table-bordered table-sm">
+    <thead class="thead-light">
+        <tr>
+            <th>User</th>
+            <th>Key</th>
+            <th>Created</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for key in keys %}
+        <tr>
+            <td>{{ key.user }}</td>
+            <td>{{ key.key }}</td>
+            <td>
+                {{ key.created|date:"m/d/Y" }}
+                {{ key.created|time:"h:i A" }}
+            </td>
+            <td class="text-center">
+                <a
+                    class="btn-refresh-key"
+                    data-user="{{ key.user.id }}"
+                    title="Refresh"
+                    href="#"
+                >
+                    <i class="fas fa-sync-alt"></i>
+                </a>
+            </td>
+            <td class="text-center">
+                <a
+                    class="btn-revoke-key"
+                    data-id="{{ key.id }}"
+                    title="Revoke"
+                    href="#"
+                >
+                    <i class="fas fa-trash-alt"></i>
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

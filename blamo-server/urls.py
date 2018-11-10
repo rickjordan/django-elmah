@@ -11,5 +11,5 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
 
     url(r'^blamo/api/', include('blamo.api')),
-    url(r'^blamo/logs/', decorator_include(login_required, 'blamo.urls')),
+    url(r'^blamo/', decorator_include(login_required, 'blamo.urls')),
 ]
