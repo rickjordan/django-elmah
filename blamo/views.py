@@ -34,8 +34,17 @@ def delete_log(request):
 
 @require_GET
 def api_keys(request):
-    keys = ApiKey.objects.all().order_by('user')
-    return render(request, 'blamo/keys.html', { 'keys': keys })
+    keys = ApiKey.objects.all().order_by('user__username')
+    users = User.objects.exclude(
+        id__in=keys.values_list('user_id', flat=True)
+    ).order_by('last_name', 'first_name')
+
+    context = {
+        'keys': keys,
+        'users': users,
+    }
+
+    return render(request, 'blamo/keys.html', context)
 
 @require_POST
 def create_api_key(request):
