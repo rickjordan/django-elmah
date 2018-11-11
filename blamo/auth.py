@@ -15,7 +15,7 @@ def auth_login(request):
             
         return HttpResponseRedirect('/')
         
-    return render(request, 'login.html')
+    return render(request, 'blamo/login.html')
 
 @login_required
 def auth_logout(request):
