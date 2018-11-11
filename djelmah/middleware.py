@@ -1,4 +1,4 @@
-class BlamoLogMiddleware:
+class DjelmahLogMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
     
@@ -12,7 +12,7 @@ class BlamoLogMiddleware:
         from datetime import datetime
         from django.conf import settings
         from django.views.debug import ExceptionReporter
-        from models import BlamoHost
+        from models import DjelmahHost
 
         reporter = ExceptionReporter(
             request,
@@ -33,14 +33,14 @@ class BlamoLogMiddleware:
         })
 
         headers = { 'Content-Type': "application/json" }
-        hosts = BlamoHost.objects.filter(active=True)
+        hosts = DjelmahHost.objects.filter(active=True)
 
         for host in hosts:
             headers['Authorization'] = "ApiKey {}:{}".format(
                 host.username, host.api_key
             )
 
-            url = host.hostname + "/blamo/api/v1/logs/"
+            url = host.hostname + "/djelmah/api/v1/logs/"
             requests.post(url, data=data, headers=headers)
             
         return None

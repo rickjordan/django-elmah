@@ -1,8 +1,8 @@
 from django.contrib import admin
-from blamo import models
+from djelmah import models
 
-@admin.register(models.BlamoHost)
-class BlamoHostAdmin(admin.ModelAdmin):
+@admin.register(models.DjelmahHost)
+class DjelmahHostAdmin(admin.ModelAdmin):
     list_display = (
         'hostname',
         'username',
@@ -10,8 +10,8 @@ class BlamoHostAdmin(admin.ModelAdmin):
         'active'
     )
 
-@admin.register(models.BlamoLog)
-class BlamoLogAdmin(admin.ModelAdmin):
+@admin.register(models.DjelmahLog)
+class DjelmahLogAdmin(admin.ModelAdmin):
     list_display = (
         'host',
         'path',

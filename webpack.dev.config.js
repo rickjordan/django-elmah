@@ -3,11 +3,11 @@ var webpack = require('webpack')
 var BundleTracker = require('webpack-bundle-tracker')
 
 module.exports = {
-    entry: './blamo-client/index.js',
+    entry: './djelmah-client/index.js',
     output: {
-        path: path.join(__dirname, '/blamo-client/bundles'),
+        path: path.join(__dirname, '/djelmah-client/bundles'),
         filename: '[name]-[hash].js',
-        publicPath: 'http://localhost:8080/blamo-client/bundles/'
+        publicPath: 'http://localhost:8080/djelmah-client/bundles/'
     },
     module: {
         rules: [{

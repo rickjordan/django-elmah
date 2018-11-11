@@ -15,7 +15,7 @@ def auth_login(request):
             
         return HttpResponseRedirect('/')
         
-    return render(request, 'blamo/login.html')
+    return render(request, 'djelmah/login.html')
 
 @login_required
 def auth_logout(request):
@@ -24,4 +24,4 @@ def auth_logout(request):
 
 @login_required
 def index(request):
-    return HttpResponseRedirect('/blamo/logs')
+    return HttpResponseRedirect('/djelmah/logs')

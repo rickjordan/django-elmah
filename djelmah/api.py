@@ -4,7 +4,7 @@ from . import resources
 
 # api resources
 api = Api(api_name='v1')
-api.register(resources.BlamoLogResource())
+api.register(resources.DjelmahLogResource())
 
 urlpatterns = [
     url(r'^', include(api.urls)),

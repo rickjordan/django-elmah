@@ -8,14 +8,14 @@ with open(os.path.join(os.path.dirname(__file__), 'README.md')) as readme:
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
-    name='blamo',
+    name='django-elmah',
     version='0.1',
-    packages=find_packages(exclude=['blamo-server']),
+    packages=find_packages(exclude=['djelmah-server']),
     include_package_data=True,
     license='GNU Affero General Public License v3',
-    description='Django Error Logging over HTTP',
+    description='Django Error Logging Modules and Handlers',
     long_description=README,
-    url='https://github.com/rickdjiii/blamo',
+    url='https://github.com/rickjordan/django-elmah',
     author='Rick Jordan',
     author_email='jordan.rick.d@gmail.com',
     install_requires=[

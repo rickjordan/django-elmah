@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.views.decorators.http import require_GET, require_POST
 from tastypie.models import ApiKey
-from models import BlamoLog
+from models import DjelmahLog
 
 # LOGS
 
@@ -13,18 +13,18 @@ def log_test(request):
 
 @require_GET
 def log_index(request):
-    logs = BlamoLog.objects.all().order_by('-datetime')
-    return render(request, 'blamo/logs.html', { 'logs': logs })
+    logs = DjelmahLog.objects.all().order_by('-datetime')
+    return render(request, 'djelmah/logs.html', { 'logs': logs })
 
 @require_GET
 def log_detail(request, log_id):
-    log = get_object_or_404(BlamoLog, pk=log_id)
+    log = get_object_or_404(DjelmahLog, pk=log_id)
     return HttpResponse(log.raw_html)
 
 @require_POST
 def delete_log(request):
     log_id = request.POST['log_id']
-    log = get_object_or_404(BlamoLog, pk=log_id)
+    log = get_object_or_404(DjelmahLog, pk=log_id)
 
     log.delete()
 
@@ -44,7 +44,7 @@ def api_keys(request):
         'users': users,
     }
 
-    return render(request, 'blamo/keys.html', context)
+    return render(request, 'djelmah/keys.html', context)
 
 @require_POST
 def create_api_key(request):

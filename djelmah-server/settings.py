@@ -23,8 +23,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tastypie',
-    'blamo-server',
-    'blamo',
+    'djelmah',
 ]
 
 MIDDLEWARE = [
@@ -35,10 +34,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'blamo.middleware.BlamoLogMiddleware',
+    'djelmah.middleware.DjelmahLogMiddleware',
 ]
 
-ROOT_URLCONF = 'blamo-server.urls'
+ROOT_URLCONF = 'djelmah-server.urls'
 
 TEMPLATES = [
     {
@@ -56,7 +55,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'blamo-server.wsgi.application'
+WSGI_APPLICATION = 'djelmah-server.wsgi.application'
 
 # Database
 DATABASES = {

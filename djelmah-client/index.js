@@ -8,7 +8,7 @@ token.setTokenHeader('jquery', $)
 $(document).ready(function() {
     // delete log
     $('.btn-delete-log').click(function() {
-        let url = "/blamo/logs/delete"
+        let url = "/djelmah/logs/delete"
         let data = { "log_id": $(this).data('id') }
 
         $.post(url, data, function() {
@@ -45,7 +45,7 @@ $(document).ready(function() {
 
     // revoke key
     $('.btn-revoke-key').click(function() {
-        let url = "/blamo/keys/revoke"
+        let url = "/djelmah/keys/revoke"
         let data = { "key_id": $(this).data('id') }
 
         $.post(url, data, function() {
@@ -55,7 +55,7 @@ $(document).ready(function() {
 })
 
 function create_or_refresh_key(user_id) {
-    let url = "/blamo/keys/create"
+    let url = "/djelmah/keys/create"
     let data = { "user_id": user_id }
 
     $.post(url, data, function() {

@@ -1,12 +1,12 @@
 from django.db import models
 
-class BlamoHost(models.Model):
+class DjelmahHost(models.Model):
     hostname = models.CharField(max_length=256)
     username = models.CharField(max_length=150)
     api_key = models.CharField(max_length=128)
     active = models.BooleanField(default=True)
 
-class BlamoLog(models.Model):
+class DjelmahLog(models.Model):
     host = models.CharField(max_length=128)
     path = models.CharField(max_length=2048)
     username = models.CharField(max_length=32)

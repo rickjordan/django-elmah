@@ -1,5 +1,5 @@
 {
-  "main": "./blamo-client/index.js",
+  "main": "./djelmah-client/index.js",
   "scripts": {
     "dev": "webpack-dev-server --config ./webpack.dev.config.js --mode development",
     "prod": "./node_modules/.bin/webpack --config ./webpack.prod.config.js",
