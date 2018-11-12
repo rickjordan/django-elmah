@@ -6,6 +6,13 @@ require('bootstrap/js/dist/modal')
 token.setTokenHeader('jquery', $)
 
 $(document).ready(function() {
+    // test log
+    $('#btn-test-log').click(function() {
+        $.get("/djelmah/logs/test").always(function() {
+            location.reload()
+        })
+    })
+
     // delete log
     $('.btn-delete-log').click(function() {
         let url = "/djelmah/logs/delete"

@@ -3,7 +3,7 @@ from . import views
 
 urlpatterns = [
     url(r'^logs/$', views.log_index),
-	url(r'^logs/(?P<log_id>\d+)$', views.log_detail),
+    url(r'^logs/(?P<log_id>\d+)$', views.log_detail),
     url(r'^logs/delete$', views.delete_log),
     url(r'^logs/test$', views.log_test),
     url(r'^keys/$', views.api_keys),

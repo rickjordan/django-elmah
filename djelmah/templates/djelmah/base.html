@@ -24,6 +24,9 @@
                     <a class="dropdown-item" href="/djelmah/logs">View Logs</a>
                     <a class="dropdown-item" href="/djelmah/keys">Manage Keys</a>
                     <div class="dropdown-divider"></div>
+                {% if request.user.is_staff %}
+                    <a class="dropdown-item" href="/admin" target="_blank">Administration</a>
+                {% endif %}
                     <a class="dropdown-item" href="/logout">Logout</a>
                 </div>
             </li>
