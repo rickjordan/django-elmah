@@ -2,6 +2,7 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
+    url(r'^$', views.index),
     url(r'^logs/$', views.log_index),
     url(r'^logs/(?P<log_id>\d+)$', views.log_detail),
     url(r'^logs/delete$', views.delete_log),

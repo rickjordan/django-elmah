@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.views.decorators.http import require_GET, require_POST
 from tastypie.models import ApiKey
@@ -8,8 +8,8 @@ from models import DjelmahLog
 # LOGS
 
 @require_GET
-def log_test(request):
-    raise Exception("It Works!")
+def index(request):
+    return HttpResponseRedirect('/djelmah/logs')
 
 @require_GET
 def log_index(request):
@@ -29,6 +29,10 @@ def delete_log(request):
     log.delete()
 
     return HttpResponse()
+
+@require_GET
+def log_test(request):
+    raise Exception("It Works!")
 
 # API KEYS
 

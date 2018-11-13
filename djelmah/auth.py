@@ -24,4 +24,4 @@ def auth_logout(request):
 
 @login_required
 def index(request):
-    return HttpResponseRedirect('/djelmah/logs')
+    return HttpResponseRedirect('/djelmah')
