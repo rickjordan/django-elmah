@@ -4,11 +4,16 @@
 
 <html lang="en">
 <head>
+    <title>djELMAH</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" />
-    <title>djELMAH</title>
+
+    {% if debug %}
+        {% load render_bundle from webpack_loader %}
+        {% render_bundle 'main' %}
+    {% else %}
+
+    {% endif %}
 </head>
 <body>
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
@@ -37,12 +42,5 @@
     <div class="container-fluid" style="padding-top:20px">
         {% block content %}{% endblock %}
     </div>
-    
-    {% if debug %}
-        {% load render_bundle from webpack_loader %}
-        {% render_bundle 'main' %}
-    {% else %}
-
-    {% endif %}
 </body>
 </html>

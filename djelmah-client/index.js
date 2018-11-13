@@ -1,5 +1,8 @@
 const $ = require('jquery')
 const token = require('django-csrf-ajax')
+
+require('@fortawesome/fontawesome-free/css/all.min.css')
+require('bootstrap/dist/css/bootstrap.min.css')
 require('bootstrap/js/dist/dropdown')
 require('bootstrap/js/dist/modal')
 
