@@ -16,7 +16,8 @@ urlpatterns = [
     url(r'^djelmah/', decorator_include(login_required, 'djelmah.urls')),
 ]
 
-if settings.SERVE_STATIC:
+# allow django runserver to serve static files in production mode during testing 
+if not settings.DEBUG and not settings.DJELMAH_INCLUDE_BUNDLE:
     from django.views.static import serve
 
     urlpatterns += [

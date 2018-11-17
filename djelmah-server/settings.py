@@ -50,6 +50,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'djelmah-server.context_processors.include_bundle',
             ],
         },
     },
@@ -90,9 +91,10 @@ USE_TZ = True
 # Static Files (CSS, JavaScript, Images)
 STATIC_ROOT = os.path.join(BASE_DIR,'djelmah-server/static')
 STATIC_URL = '/static/'
-SERVE_STATIC = config('SERVE_STATIC', cast=bool)
 
-if DEBUG:
+DJELMAH_INCLUDE_BUNDLE = config('DJELMAH_INCLUDE_BUNDLE', cast=bool)
+
+if DJELMAH_INCLUDE_BUNDLE:
     INSTALLED_APPS.append('webpack_loader')
     WEBPACK_LOADER = {
         'DEFAULT': {

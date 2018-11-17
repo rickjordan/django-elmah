@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    {% if debug %}
+    {% if DJELMAH_INCLUDE_BUNDLE %}
         {% include 'djelmah/bundle.html' %}
     {% else %}
         {% load static %}
