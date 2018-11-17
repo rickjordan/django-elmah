@@ -88,7 +88,9 @@ USE_L10N = True
 USE_TZ = True
 
 # Static Files (CSS, JavaScript, Images)
+STATIC_ROOT = os.path.join(BASE_DIR,'djelmah-server/static')
 STATIC_URL = '/static/'
+SERVE_STATIC = config('SERVE_STATIC', cast=bool)
 
 if DEBUG:
     INSTALLED_APPS.append('webpack_loader')

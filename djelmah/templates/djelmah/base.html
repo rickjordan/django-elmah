@@ -1,5 +1,3 @@
-{% load static %}
-
 <!doctype html>
 
 <html lang="en">
@@ -9,10 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
     {% if debug %}
-        {% load render_bundle from webpack_loader %}
-        {% render_bundle 'main' %}
+        {% include 'djelmah/bundle.html' %}
     {% else %}
-
+        {% load static %}
+        <script src="{% static 'djelmah/script.min.js' %}"></script>
     {% endif %}
 </head>
 <body>

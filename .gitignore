@@ -1,6 +1,7 @@
 .vscode/
 dist/
 node_modules/
+djelmah-server/static
 
 *.env
 *.pyc

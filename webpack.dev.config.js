@@ -1,6 +1,6 @@
-var path = require("path")
-var webpack = require('webpack')
-var BundleTracker = require('webpack-bundle-tracker')
+const path = require("path")
+const webpack = require('webpack')
+const BundleTracker = require('webpack-bundle-tracker')
 
 module.exports = {
     entry: './djelmah-client/index.js',
@@ -19,16 +19,6 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: ['style-loader', 'css-loader']
-            },
-            {
-                test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-                use: [{
-                    loader: 'file-loader',
-                    options: {
-                        name: '[name].[ext]',
-                        outputPath: 'fonts/'
-                    }
-                }]
             }
         ]
     },

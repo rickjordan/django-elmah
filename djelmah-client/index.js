@@ -1,12 +1,8 @@
 const $ = require('jquery')
-const token = require('django-csrf-ajax')
+require('./style')
 
-require('@fortawesome/fontawesome-free/css/all.min.css')
-require('bootstrap/dist/css/bootstrap.min.css')
-require('bootstrap/js/dist/dropdown')
-require('bootstrap/js/dist/modal')
-
-token.setTokenHeader('jquery', $)
+// set ajax token headers
+require('django-csrf-ajax').setTokenHeader('jquery', $)
 
 $(document).ready(function() {
     // test log
