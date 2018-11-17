@@ -5,6 +5,7 @@ django-decorator-include==1.4.1
 django-tastypie==0.14.1
 django-webpack-loader==0.6.0
 idna==2.7
+MySQL-python==1.2.5
 python-dateutil==2.7.3
 python-decouple==3.1
 python-mimeparse==1.6.0
