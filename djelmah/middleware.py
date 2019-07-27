@@ -11,8 +11,9 @@ class DjelmahLogMiddleware:
         import json, requests, sys
         from datetime import datetime
         from django.conf import settings
+        from django.core import serializers
         from django.views.debug import ExceptionReporter
-        from models import DjelmahHost
+        from models import DjelmahHost, DjelmahLog
 
         reporter = ExceptionReporter(
             request,
@@ -21,6 +22,20 @@ class DjelmahLogMiddleware:
             sys.exc_info()[2]
         )
 
+        log = DjelmahLog(
+            host=request.get_host(),
+            path=request.get_full_path(),
+            username=request.user.username,
+            datetime=datetime.now(),
+            error_type=exception.__class__.__name__,
+            error_message=exception.message,
+            status_code="500",
+            raw_html=reporter.get_traceback_html()
+        )
+
+        data = serializers.serialize('json', log)
+
+        """
         data = json.dumps({
             'host': request.get_host(),
             'path': request.get_full_path(),
@@ -31,16 +46,21 @@ class DjelmahLogMiddleware:
             'status_code': "500",
             'raw_html': reporter.get_traceback_html()
         })
+        """
 
         headers = { 'Content-Type': "application/json" }
         hosts = DjelmahHost.objects.filter(active=True)
 
         for host in hosts:
-            headers['Authorization'] = "ApiKey {}:{}".format(
-                host.username, host.api_key
-            )
+            if host.hostname == "localhost":
+                DjelmahLog.save()
+                
+            else:
+                headers['Authorization'] = "ApiKey {}:{}".format(
+                    host.username, host.api_key
+                )
 
-            url = host.hostname + "/djelmah/api/v1/logs/"
-            requests.post(url, data=data, headers=headers)
+                url = host.hostname + "/djelmah/api/v1/logs/"
+                requests.post(url, data=data, headers=headers)
             
         return None
