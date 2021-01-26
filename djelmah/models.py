@@ -2,8 +2,8 @@ from django.db import models
 
 class DjelmahHost(models.Model):
     hostname = models.CharField(max_length=256)
-    username = models.CharField(max_length=150)
-    api_key = models.CharField(max_length=128)
+    username = models.CharField(max_length=150, blank=True)
+    api_key = models.CharField(max_length=128, blank=True)
     active = models.BooleanField(default=True)
 
 class DjelmahLog(models.Model):

@@ -11,7 +11,7 @@ class DjelmahLogMiddleware:
         import json, requests, sys
         from datetime import datetime
         from django.conf import settings
-        from django.core import serializers
+        from django.forms.models import model_to_dict
         from django.views.debug import ExceptionReporter
         from models import DjelmahHost, DjelmahLog
 
@@ -32,28 +32,17 @@ class DjelmahLogMiddleware:
             status_code="500",
             raw_html=reporter.get_traceback_html()
         )
-
-        data = serializers.serialize('json', log)
-
-        """
-        data = json.dumps({
-            'host': request.get_host(),
-            'path': request.get_full_path(),
-            'username': request.user.username,
-            'datetime': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-            'error_type': exception.__class__.__name__,
-            'error_message': exception.message,
-            'status_code': "500",
-            'raw_html': reporter.get_traceback_html()
-        })
-        """
+        
+        data = json.dumps(
+            model_to_dict(log), default=lambda obj: obj.__str__()
+        )
 
         headers = { 'Content-Type': "application/json" }
         hosts = DjelmahHost.objects.filter(active=True)
 
         for host in hosts:
             if host.hostname == "localhost":
-                DjelmahLog.save()
+                log.save()
                 
             else:
                 headers['Authorization'] = "ApiKey {}:{}".format(
