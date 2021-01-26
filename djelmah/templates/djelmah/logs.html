@@ -2,6 +2,57 @@
 
 {% block content %}
 
+<!-- Filter -->
+<form method="get" action="" class="form-inline my-3">
+    <label>Host:</label>
+    <select
+        class="form-control form-control-sm ml-1 mr-2"
+        name="host"
+    >
+        <option value="">All</option>
+    {% for host in hosts %}
+        <option
+            value="{{ host }}"
+        {% if host == selected_host %}
+            selected
+        {% endif %}
+        >
+            {{ host }}
+        </option>
+    {% endfor %}
+    </select>
+
+    <label>Start Date:</label>
+    <input
+        type="date"
+        class="form-control form-control-sm ml-1 mr-2"
+        value="{{ start_date|date:'Y-m-d'|default:'' }}"
+        name="start_date"
+    >
+
+    <label>End Date:</label>
+    <input
+        type="date"
+        class="form-control form-control-sm ml-1 mr-2"
+        value="{{ end_date|date:'Y-m-d'|default:'' }}"
+        name="end_date"
+    >
+    
+    <button
+        type="submit"
+        class="btn btn-primary btn-sm mr-2"
+    >
+        Filter
+    </button>
+    <a
+        href="/djelmah/logs"
+        class="btn btn-outline-primary btn-sm"
+    >
+        Reset
+    </a>
+</form>
+
+<!-- Logs -->
 <table class="table table-bordered table-sm">
     <thead class="thead-light">
         <tr>
