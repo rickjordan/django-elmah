@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta
 from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
@@ -13,8 +14,40 @@ def index(request):
 
 @require_GET
 def log_index(request):
+    hosts = DjelmahLog.objects.values_list('host', flat=True).distinct()
     logs = DjelmahLog.objects.all().order_by('-datetime')
-    return render(request, 'djelmah/logs.html', { 'logs': logs })
+
+    if request.GET:
+        selected_host = request.GET.get('host', None)
+
+        start_date = request.GET.get('start_date', None)
+        start_date = datetime.strptime(start_date, '%Y-%m-%d') if start_date else None
+    
+        end_date = request.GET.get('end_date', None)
+        end_date = datetime.strptime(end_date, '%Y-%m-%d') if end_date else None
+    else:
+        selected_host = None
+        end_date = datetime.today()
+        start_date = end_date - timedelta(days=30)
+
+    if selected_host:
+        logs = logs.filter(host=selected_host)
+
+    if start_date:
+        logs = logs.filter(datetime__gte=start_date)
+
+    if end_date:
+        logs = logs.filter(datetime__lte=end_date + timedelta(days=1))
+
+    context = {
+        'selected_host': selected_host,
+        'start_date': start_date,
+        'end_date': end_date,
+        'hosts': hosts,
+        'logs': logs,
+    }
+
+    return render(request, 'djelmah/logs.html', context)
 
 @require_GET
 def log_detail(request, log_id):
